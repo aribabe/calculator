@@ -1,57 +1,47 @@
 import java.util.Scanner;
 
 public class Calculator {
-	 public static void main(String[] args) {
-		 
-		 Scanner sc = new Scanner(System.in);
-		 System.out.println("첫번째 입력 값은 : ");
-		 int first = sc.nextInt();
-		 System.out.println(first);
-		 
-		 
-		 int result= first;
-		 while(true) {
-			 System.out.println("연산 기호: ");
-			 String symbol= sc.next();
-			 System.out.println(symbol);
+
+	 static int calculate(String symbol, int first, int second) {
+		 int result=0;
+		 if(symbol.equals("+")) {
 			 
-			 if(symbol.equals("quit")) {
-				 System.out.println("최종 결과 값 : " + result );
-				 break;
-			 }
-			 
-			 System.out.println("두번째 입력 값은: ");
-			 int second = Integer.parseInt(sc.next());
-			 System.out.println(second);
-			
-			 
-			 if(symbol.equals("+")) {
-				 result = result + second;
-				 System.out.println("더하기 : " + result);
-			 }else if(symbol.equals("-")){
-				 result = result - second;
-				 System.out.println("빼기 : " + result);
-			 }else if(symbol.equals("*")){
-				 result = result * second;
-				 System.out.println("곱하기 : " + result);
-			 }else if(symbol.equals("/")){
-				 result = result / second;
-				 System.out.println("나누기 : " + result);
-				 
-			 }else if(symbol.equals("%")){
-				 result = result % second;
-				 System.out.println("나머지 구하기: " + result);
-			 }else {
-				 System.out.println("잘못된 값을 입력하셨습니다");
-			
-			 }
+			 result=first+second;
+			 System.out.println("더하기="+result);
+		 }else if(symbol.equals("-")) {
+			 result=first-second;
+			 System.out.println("빼기="+result);
+		 }else if(symbol.equals("*")) {
+			 result=first*second;
+			 System.out.println("곱하기="+result);
+		 }else if(symbol.equals("/")) {
+			 result=first/second;
+			 System.out.println("나누기="+result);
+		 }else if(symbol.equals("%")) {
+			 result=first%second;
+			 System.out.println("나누기="+result);
+		 }else {
+			 System.out.println("심볼 값을 잘못 입력하셨습니다.");
 		 }
+		return result;
 		 
-//		 
-//			System.out.println("더하기 : " + (first + second));
-//			System.out.println("빼기 : " + (first - second));
-//			System.out.println("곱하기 : " + (first * second));
-//			System.out.println("나누기 : " + (first / second));
-//			System.out.println("나머지 구하기: " + (first % second));
+	 }
+	  
+	 public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
+		int first = Input.getFirstValue(scanner);
+		int result= first;
+		while(true) {
+			String symbol = Input.getSymbol(scanner);
+			
+			if(symbol.equals("quit")) {
+				Output.print(result);
+				break;
+			}
+			
+			int second = Input.getSecondValue(scanner);
+			result = calculate(symbol, result, second);
+		}
 	}
 }
